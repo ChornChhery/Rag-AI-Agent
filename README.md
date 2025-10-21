@@ -2,6 +2,14 @@
 
 A Retrieval-Augmented Generation (RAG) application that processes PDF documents and enables intelligent question-answering using local LLM models through Ollama.
 
+## 📸 Application Screenshots
+
+### Main Interface
+![Application Main Interface](app.png)
+
+### Upload and Query Interface
+![Upload and Query Interface](app1.png)
+
 ## 🚀 Features
 
 - **PDF Document Processing**: Upload and process PDF files for knowledge extraction
@@ -110,11 +118,13 @@ npx inngest-cli@latest dev -u http://127.0.0.1:8000/api/inngest
 
 This enables the background workflow processing for document ingestion.
 
-### Terminal 3: Start Streamlit UI (Optional)
+### Terminal 3: Start Streamlit UI
 
 ```bash
 streamlit run app.py
 ```
+
+The UI will be available at `http://localhost:8501`
 
 ## 📁 Project Structure
 
@@ -133,9 +143,13 @@ ragproductapp/
 ├── qdrant_storage/       # Qdrant database storage (Docker volume)
 ├── uploads/              # Temporary upload storage
 │
+├── app.png              # Application screenshot
+├── app1.png             # Application screenshot
+│
 ├── pyproject.toml        # Project dependencies (uv)
 ├── uv.lock              # Locked dependency versions
-└── README.md            # This file
+├── README.md            # This file
+└── docs.odt             # Documentation file
 ```
 
 ## 🔄 How It Works
@@ -169,7 +183,6 @@ The application uses Inngest for reliable background processing with three key c
 8. **Retrieval** → Find relevant document chunks
 9. **Generation** → Ollama llama3.2 generates contextual answer
 
-
 ## ⚙️ Configuration
 
 Create a `.env` file for environment variables:
@@ -191,32 +204,100 @@ LLM_MODEL=llama3.2
 - **FastAPI**: Fast, modern, automatic API documentation
 - **Streamlit**: Rapid UI development, Python-native
 
+## 💡 Usage Examples
+
+### Upload a PDF Document
+
+1. Navigate to the Streamlit UI at `http://localhost:8501`
+2. Click on "Choose a PDF" in the upload section
+3. Select your PDF file
+4. Wait for the success message
+
+### Ask Questions
+
+1. Type your question in the text input field
+2. Adjust the number of chunks to retrieve (default: 5)
+3. Click "Ask Question"
+4. View the AI-generated answer and sources
+
 ## 🐛 Troubleshooting
 
 ### Qdrant Connection Issues
 ```bash
 docker ps -a  # Check if Qdrant is running
 docker start qdrant  # Start if stopped
+docker logs qdrant  # Check logs for errors
 ```
 
 ### Ollama Model Not Found
 ```bash
 ollama list  # Check installed models
 ollama pull llama3.2  # Download if missing
+ollama pull nomic-embed-text  # Download embedding model
 ```
 
 ### Inngest Not Connecting
 - Ensure FastAPI server is running on port 8000
 - Check Inngest dev server URL matches your API endpoint
+- Verify the Inngest webhook is properly configured
+
+### Port Already in Use
+```bash
+# Find process using port 8000
+lsof -i :8000
+
+## 📊 Performance Tips
+
+- For faster processing, use PDFs with clear text (not scanned images)
+- Adjust `top_k` parameter based on document complexity
+- Monitor Docker container resources for Qdrant
+- Use SSD storage for Qdrant data directory for better performance
+
+## 🔐 Security Considerations
+
+- All data is processed locally - no external API calls
+- PDF files are stored in the `uploads/` directory
+- Qdrant database is stored in `qdrant_storage/` directory
+- Consider adding authentication for production deployments
+- Implement rate limiting for API endpoints
+
+## 🚀 Future Enhancements
+
+- [ ] Support for multiple file formats (DOCX, TXT, CSV)
+- [ ] User authentication and multi-tenancy
+- [ ] Conversation history and chat memory
+- [ ] Advanced filtering and metadata search
+- [ ] Export answers and sources to PDF
+- [ ] Real-time collaborative document analysis
+- [ ] Integration with cloud storage (S3, Google Drive)
+- [ ] Custom embedding models support
 
 ## 📝 License
 
-[Mr.Chhery Chorn]
+**Mr.Chhery Chorn**
 
-## 🤝 Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+- Open an issue on GitHub
+- Check the [Documentation](docs.odt)
+- Review existing issues for solutions
+
+## 🙏 Acknowledgments
+
+- LlamaIndex team for the excellent RAG framework
+- Ollama team for local LLM capabilities
+- Qdrant team for the vector database
+- Inngest team for workflow orchestration
+- Streamlit team for the UI framework
 
 ---
 
 **Status**: ✅ Working Successfully
+
+**Last Updated**: October 2025
+
+**Version**: 1.0.0
