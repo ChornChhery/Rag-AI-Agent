@@ -24,3 +24,5 @@ echo "OpenAI builds safe and useful AI tools." > data/test.txt
 
 Vector Database Setup with Docker 
 docker run -d --name qdrant -p 6333:6333 -v "./qdrant_storage:/qdrant/storage" qdrant/qdrant
+docker start qdrant
+docker ps -a
