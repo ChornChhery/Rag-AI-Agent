@@ -17,7 +17,7 @@ client = Ollama(model=MODEL)
 # EMED_DIM = 3072
 
 # using ollama
-EMBED_MODEL = "llama3.2"
+EMBED_MODEL = "nomic-embed-text"
 embed_model = OllamaEmbedding(model_name=EMBED_MODEL)
 
 # chunk_overlap mean to split sentence to chunk

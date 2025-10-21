@@ -4,6 +4,9 @@ Step Up project
 3. uv add ollama
 4. uv add llama-index-llms-ollama
 5. uv pip install llama-index-embeddings-ollama
+6. ollama pull nomic-embed-text
+7. pip install requests
+
 
 
 
@@ -18,7 +21,7 @@ Run Server with Inngest
 
 Create directory data
 mkdir data
-echo "OpenAI builds safe and useful AI tools." > data/test.txt
+ls la data -> 6520310203.pdf
 
 
 
@@ -26,3 +29,9 @@ Vector Database Setup with Docker
 docker run -d --name qdrant -p 6333:6333 -v "./qdrant_storage:/qdrant/storage" qdrant/qdrant
 docker start qdrant
 docker ps -a
+
+
+# Inngest functions
+1. Triggers
+2. Flow Control
+3. Steps
