@@ -5,10 +5,10 @@ A Retrieval-Augmented Generation (RAG) application that processes PDF documents 
 ## 📸 Application Screenshots
 
 ### Main Interface
-![Application Main Interface](app.png)
+![Application Main Interface](app1.png)
 
 ### Upload and Query Interface
-![Upload and Query Interface](app1.png)
+![Upload and Query Interface](app.png)
 
 ## 🚀 Features
 
