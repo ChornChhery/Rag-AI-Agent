@@ -8,9 +8,8 @@ import uuid
 import os
 import datetime
 
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
-from llama_index.llms.ollama import Ollama
-from llama_index.embeddings.ollama import OllamaEmbedding
+from data_loader import load_and_chunk_pdf, embed_texts
+from vector_db import QdrantStorage
 
 load_dotenv()
 
@@ -27,34 +26,7 @@ inngest_client = inngest.Inngest(
     trigger=inngest.TriggerEvent(event="rag/ingest_pdf")
 )
 async def rag_ingest_pdf(ctx: inngest.Context):
-    try:
-        # load documents from the ./data directory
-        documents = SimpleDirectoryReader("./data").load_data()
-
-        # Initialize Ollama LLM (Locally llama3.2)
-        MODEL = "llama3.2"
-        llm = Ollama(model = MODEL)
-        embed_model = OllamaEmbedding(model_name=MODEL)
-
-        # Build vector index using llamaIndex
-        index = VectorStoreIndex.from_documents(documents,llm=llm,embed_model=embed_model)
-
-        # Query index
-        query_engine = index.as_query_engine()
-        response = query_engine.query("Summarize the uploaded documents.")
-
-        print("Summary: ",response)
-
-        return {
-            "summary": str(response),
-            "status": "PDFs indexed and processed locally using Ollama"
-        }
-    except Exception as e:
-        print("Error:", e)
-        return {
-            "error": str(e),
-            "status": "Failed"
-        }
+    return {"hello":"world"}
 
 
 

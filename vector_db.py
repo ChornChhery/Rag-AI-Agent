@@ -36,7 +36,7 @@ class QdrantStorage:
     
         # Return data
         for i in results:
-            payload = getattr(i, "playload", None) or {}
+            payload = getattr(i, "payload", None) or {}
             text = payload.get("text", "")
             source = payload.get("source","")
             if text:
@@ -44,4 +44,9 @@ class QdrantStorage:
                  sources.add(source)
 
         return {"contexts": contexts, "sources": list(sources)}
+    
+    # delete collection()
+    def delete(self):
+         if self.client.collection_exists(self.collection):
+              self.client.delete(self.collection)
 
